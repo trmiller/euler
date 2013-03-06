@@ -23,9 +23,3 @@ while True:
         break
     i += 1
 print "done" 
-
-
-#for i in sorted(triangle_numbers.iterkeys()):
-#    print i
-#    for j in triangle_numbers[i]:
-#        print "\t ", j
