@@ -27,3 +27,14 @@ def AtkinSieve (limit):
         if sieve[index]:
             results.append(index)
     return results
+
+def memoize(f):
+    cache = {}
+    
+    def memoizedFunction(*args):
+        if args not in cache:
+            cache[args] = f(*args)
+        return cache[args]
+    
+    memoizedFunction.cace = cache
+    return memoizedFunction
