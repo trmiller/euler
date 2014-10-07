@@ -1,30 +1,44 @@
 
 def non_abundant_sums(self):
-    abundant_numbers = get_abundant_sums(28123)
+    abundant_numbers = get_non_abundant_sums(28124)
     print abundant_numbers
-    sum = 0
-    for i in xrange(12,28123):
-        div = get_proper_divisors(i)
-        if len(subfinder(abundant_numbers, div)) < 2:
-            sum += i
-    return sum
 
-def subfinder(mylist, pattern):
-    matches = []
-    for i in range(len(mylist)):
-        if mylist[i] == pattern[0] and mylist[i:i+len(pattern)] == pattern:
-            matches.append(pattern)
-    return matches
+def is_abundant_sum(num, divisors, abundant_nums):
+    count = 0
+    if num % 2 == 0:
+        count = count + 1
+    for i in divisors:
+        if i in abundant_nums:
+            count = count + 1
+        if count == 2:
+            return False
+    return True
     
-def get_abundant_sums(top_limit):
+def get_non_abundant_sums(top_limit):
+    sum = 0
     abundant_numbers = []
     for i in xrange(1, top_limit):
-        if is_abundant_number(i):
+        print i
+        divisors = get_proper_divisors(i)
+        #print divisors
+        
+        if is_abundant_number(i, divisors):
+            #print 'abundant number'
             abundant_numbers.append(i)
-    return abundant_numbers
+        
+        if is_abundant_sum(i, divisors, abundant_numbers) == True:
+            sum = sum + i
+        else:
+            print '\tis abundant sum'
+        
+        #print '-------------------'
+    
+    #print 'all abundant nums'
+    #print abundant_numbers
+    return sum
 
-def is_abundant_number(num):
-    divisors = get_proper_divisors(num)
+def is_abundant_number(num, divisors):
+    
     if sum(divisors) > num:
         return True
     return False
